@@ -9,7 +9,7 @@ public class LockedMe {
 
 	static final String PROJECTFILESPATH = "C:\\Users\\Roosewelt\\Desktop\\MyLockedMefile";
 
-	static final String ERRORMESSAGE = "Sorry :\\ . \n"
+	static final String ERRORMESSAGE = "Sorry :\\  \n"
 			+ "Some error occured, please contact: admin.help@lockedme.com";
 	
 	public static final Scanner CONSOLE = new Scanner(System.in);
@@ -72,8 +72,9 @@ public class LockedMe {
 								}
 								else {
 									System.out.println("enter only integer");
-									
+									System.out.println();
 								}
+								CONSOLE.nextLine();
 								CONSOLE.nextLine();
 							}
 								break;
@@ -103,7 +104,10 @@ public class LockedMe {
 		}
 	
 	}
-
+	
+	/**
+	 * this method displays menu operations
+	 */
 	public static void displayMenu() {
 		System.out.println();
 		System.out.println("Main menu - ");
@@ -143,25 +147,34 @@ public class LockedMe {
 	 * this method creates new files into the directory
 	 */
 	public static void createFiles() {
-		Scanner sc= new Scanner(System.in);
 		System.out.println("enter your filename");
-		String fileName= sc.next();
-		System.out.println("enter the number of lines you would like to insert to your file");
-		int line= Integer.parseInt(sc.next());
-		try {
-			FileWriter writeInto= new FileWriter(PROJECTFILESPATH+"\\"+fileName);
-			for(int i=1;i<=line;i++) {
-				System.out.println("Enter line "+i);
-				writeInto.write(sc.next()+"\n");
-				
-			}
-			System.out.println("file added");
+		String fileName= CONSOLE.next();
+
+		System.out.println("enter the number of lines you would like to insert on your file");
+		boolean cIsAnInt = CONSOLE.hasNextInt();
+		if(cIsAnInt) {
+			int line= Integer.parseInt(CONSOLE.next());
+			try {
+				FileWriter writeInto= new FileWriter(PROJECTFILESPATH+"\\"+fileName);
+				for(int i=1;i<=line;i++) {
+					System.out.println("Enter line "+i);
+					writeInto.write(CONSOLE.next()+"\n");
+				}
+			System.out.println("New file created with the name " + fileName);
+			System.out.println();
 			writeInto.close();
-			
+			}
+			catch (IOException e) {
+				System.out.println(ERRORMESSAGE);
+			}
 		}
-		catch (IOException e) {
-			System.out.println(ERRORMESSAGE);
+		else {
+			System.out.println("Please enter only integer");
+			while(CONSOLE.hasNextLine()) {
+				CONSOLE.nextLine();
+			}
 		}
+		
 	}
 
 	/**
@@ -208,12 +221,12 @@ public class LockedMe {
 			 }
 
 			 if(fileNames.contains(fileName)) {
-				 System.out.println(fileName+" found");
+				 System.out.println(fileName+" file found");
 			 }
 			 else {
 				 System.out.println("Sorry :( \n"+	"The file you are looking for is not in this directory");
 			 }
-
+			 System.out.println();
 		}
 		catch(Exception ex) {
 			System.out.println(ERRORMESSAGE);
