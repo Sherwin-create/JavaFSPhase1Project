@@ -10,7 +10,7 @@ public class LockedMe {
 	static final String PROJECTFILESPATH = "C:\\Users\\Roosewelt\\Desktop\\MyLockedMefile";
 
 	static final String ERRORMESSAGE = "Sorry :\\ . \n"
-			+ "Some error occured, please contact: admin@lockedme.help";
+			+ "Some error occured, please contact: admin.help@lockedme.com";
 	
 	public static final Scanner CONSOLE = new Scanner(System.in);
 
@@ -20,7 +20,6 @@ public class LockedMe {
 		System.out.println("\t\t\t\t-Created by Sherwin ");
 		System.out.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
 		
-		//Scanner CONSOLE = new Scanner(System.in);
 		try {
 			int ch = 0;
 			do{
@@ -35,16 +34,50 @@ public class LockedMe {
 					case 1: getAllFiles();
 					break;
 					
-					case 2: createFiles();
-					break;
-					
-					case 3: deleteFiles();
-					break;
-					
-					case 4: searchFiles();
-					break;
-					
-					case 5:System.out.println("Bye Bye... \n"+
+					case 2:
+							
+							boolean leave = true;
+							while(leave) {
+								System.out.println("Business operations - ");
+								System.out.println("1.Create a new file");
+								System.out.println("2.Delete a file");
+								System.out.println("3.Search a file");
+								System.out.println("4.Return to the main menu");
+								System.out.println();
+								 
+								System.out.println("Enter your choice");
+								boolean bIsAnInt = CONSOLE.hasNextInt();
+								
+								if(bIsAnInt){
+									int businessCh = CONSOLE.nextInt();
+									if(businessCh == 1) {
+										createFiles();
+										continue;
+									}
+									else if(businessCh == 2) {
+										deleteFiles();
+										continue;
+									}
+									else if(businessCh == 3) {
+										searchFiles();
+										continue;
+									}
+									else if(businessCh == 4) {
+										leave = false;
+										break;
+									}
+									else {
+										System.out.println("Invalid option");
+									}
+								}
+								else {
+									System.out.println("enter only integer");
+									
+								}
+								CONSOLE.nextLine();
+							}
+								break;
+					case 3:System.out.println("Bye Bye... \n"+
 												"Program exited");
 						   System.exit(ch);
 					
@@ -54,15 +87,16 @@ public class LockedMe {
 				
 				}
 				else {
-					System.out.println("Invalid number");
+					System.out.println("Please enter only integer ");
 				}
 				CONSOLE.nextLine();
 				
 			}while(true);
 		}
 		catch(Exception ex) {
-			System.out.println("Enter only numbers from (1 - 5 ) ");
+			System.out.println(ERRORMESSAGE);
 			System.out.println("Exited from the program " +ex);
+		
 		}
 		finally {
 			CONSOLE.close();
@@ -72,11 +106,10 @@ public class LockedMe {
 
 	public static void displayMenu() {
 		System.out.println();
+		System.out.println("Main menu - ");
 		System.out.println("1.Display all the files");
-		System.out.println("2.Create a new file");
-		System.out.println("3.Delete a file");
-		System.out.println("4.Search a file");
-		System.out.println("5.Exit");
+		System.out.println("2.Business level operation - add, delete & create files");
+		System.out.println("3.Exit");
 		System.out.println();
 	}
 
@@ -136,20 +169,22 @@ public class LockedMe {
 	 */
 	
 	public static void deleteFiles() {
-		//Scanner CONSOLE = new Scanner(System.in);
 		try {
 			System.out.println("Enter the file name to be deleted ");
-				String fileName = CONSOLE.next();
+			String fileName = CONSOLE.next();
 			
 			File folder = new File(PROJECTFILESPATH + "\\" + fileName);
+			
 			if(folder.exists()) {
 				folder.delete();
 				System.out.println("File "+ fileName+ " deleted sucessefully " );
 			}
 			else {
 				System.out.println("Failed to delete the file");
-			}	
+			}
+			System.out.println();
 		}
+			
 		catch(Exception ex) {
 			System.out.println(ERRORMESSAGE);
 		}
@@ -176,7 +211,7 @@ public class LockedMe {
 				 System.out.println(fileName+" found");
 			 }
 			 else {
-				 System.out.println("The file you are looking for is not in this directory");
+				 System.out.println("Sorry :( \n"+	"The file you are looking for is not in this directory");
 			 }
 
 		}
