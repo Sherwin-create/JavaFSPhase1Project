@@ -41,15 +41,21 @@ public class LockedMe {
 					
 					case 2: businessMenu();
 							break;
+							
 					case 3:System.out.println("Thank you for using lockedMe.com\n"+
 							                  "Bye Bye... \n"+
-											  "Program exited");
+											  "Application exited");
 						   System.exit(ch);
+						   
+					default:System.out.println("Invalid option");
+					break;
+					
 					}
-				
 				}
 				else {
-					System.out.println("Please enter only integer ");
+					System.out.println("Please enter only integer \n"
+							+ "Returned to the business operation menu");
+					
 				}
 				CONSOLE.nextLine();
 				
@@ -128,8 +134,8 @@ public class LockedMe {
 			}
 			else {
 				System.out.println("Please enter only integer");
-			}
-			CONSOLE.nextLine();
+				CONSOLE.nextLine();
+			}		
 			CONSOLE.nextLine();
 		}
 		catch(Exception ex){
@@ -200,14 +206,16 @@ public class LockedMe {
 		 boolean leave = true;
 			while(leave) {
 				System.out.println();
+				System.out.println("**********************************************");
 				System.out.println("Business operations - ");
-				System.out.println("1.Create a new file");
-				System.out.println("2.Delete a file");
-				System.out.println("3.Search a file");
-				System.out.println("4.Return to the main menu");
+				System.out.println("\t\t1.Create a new file");
+				System.out.println("\t\t2.Delete a file");
+				System.out.println("\t\t3.Search a file");
+				System.out.println("\t\t4.Return to the main menu");
+				System.out.println("**********************************************");
 				System.out.println();
 				 
-				System.out.println("Enter your choice");
+				System.out.println("Enter your choice for business menu :");
 				boolean bIsAnInt = CONSOLE.hasNextInt();
 				
 				if(bIsAnInt){
@@ -234,11 +242,10 @@ public class LockedMe {
 					}
 				}
 				else {
-					System.out.println("enter only integer");
-					System.out.println();
+					System.out.println("enter only integer \n");
+					CONSOLE.nextLine();
 				}
-				CONSOLE.nextLine();
-				CONSOLE.nextLine();
+				
 			}
 	}
 }
