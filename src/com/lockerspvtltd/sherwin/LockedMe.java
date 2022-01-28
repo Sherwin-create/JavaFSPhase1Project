@@ -2,7 +2,7 @@ package com.lockerspvtltd.sherwin;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.*;
 
 public class LockedMe {
@@ -16,9 +16,13 @@ public class LockedMe {
 
 	public static void main(String args[]) {
 		System.out.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
-		System.out.println("\t\tWelcome to Lockedme.com");
-		System.out.println("\t\t\t\t-Created by Sherwin ");
+		System.out.println("\t\tWelcome to Lockedme.com\n");
+		System.out.println("\t\t\t\t-Designed by Sherwin Dcosta ");
+		System.out.println("\t\t\t\t-email: sherwindcosta18@gmail.com ");
 		System.out.println("*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=");
+		
+		System.out.println();
+		System.out.println("# This program helps you to display files, create files, search files \nand delete files on your machine. \n");
 		
 		try {
 			int ch = 0;
@@ -28,62 +32,19 @@ public class LockedMe {
 				boolean isAnInt = CONSOLE.hasNextInt();
 	
 				if(isAnInt) {
+					
 					ch = CONSOLE.nextInt();
 					switch(ch) {
 					
 					case 1: getAllFiles();
 					break;
 					
-					case 2:
-							
-							boolean leave = true;
-							while(leave) {
-								System.out.println("Business operations - ");
-								System.out.println("1.Create a new file");
-								System.out.println("2.Delete a file");
-								System.out.println("3.Search a file");
-								System.out.println("4.Return to the main menu");
-								System.out.println();
-								 
-								System.out.println("Enter your choice");
-								boolean bIsAnInt = CONSOLE.hasNextInt();
-								
-								if(bIsAnInt){
-									int businessCh = CONSOLE.nextInt();
-									if(businessCh == 1) {
-										createFiles();
-										continue;
-									}
-									else if(businessCh == 2) {
-										deleteFiles();
-										continue;
-									}
-									else if(businessCh == 3) {
-										searchFiles();
-										continue;
-									}
-									else if(businessCh == 4) {
-										leave = false;
-										break;
-									}
-									else {
-										System.out.println("Invalid option");
-									}
-								}
-								else {
-									System.out.println("enter only integer");
-									System.out.println();
-								}
-								CONSOLE.nextLine();
-								CONSOLE.nextLine();
-							}
-								break;
-					case 3:System.out.println("Bye Bye... \n"+
-												"Program exited");
+					case 2: businessMenu();
+							break;
+					case 3:System.out.println("Thank you for using lockedMe.com\n"+
+							                  "Bye Bye... \n"+
+											  "Program exited");
 						   System.exit(ch);
-					
-					default:System.out.println("Enter valid option");
-					break;
 					}
 				
 				}
@@ -96,8 +57,7 @@ public class LockedMe {
 		}
 		catch(Exception ex) {
 			System.out.println(ERRORMESSAGE);
-			System.out.println("Exited from the program " +ex);
-		
+			System.out.println("Exited from the program " +ex);	
 		}
 		finally {
 			CONSOLE.close();
@@ -152,29 +112,29 @@ public class LockedMe {
 
 		System.out.println("enter the number of lines you would like to insert on your file");
 		boolean cIsAnInt = CONSOLE.hasNextInt();
-		if(cIsAnInt) {
-			int line= Integer.parseInt(CONSOLE.next());
-			try {
+		try {
+			if(cIsAnInt) {
+				int line= Integer.parseInt(CONSOLE.next());
+				
 				FileWriter writeInto= new FileWriter(PROJECTFILESPATH+"\\"+fileName);
+					
 				for(int i=1;i<=line;i++) {
 					System.out.println("Enter line "+i);
 					writeInto.write(CONSOLE.next()+"\n");
 				}
-			System.out.println("New file created with the name " + fileName);
-			System.out.println();
-			writeInto.close();
+				System.out.println("New file created with the name " + fileName);
+				System.out.println();
+				writeInto.close();
 			}
-			catch (IOException e) {
-				System.out.println(ERRORMESSAGE);
+			else {
+				System.out.println("Please enter only integer");
 			}
+			CONSOLE.nextLine();
+			CONSOLE.nextLine();
 		}
-		else {
-			System.out.println("Please enter only integer");
-			while(CONSOLE.hasNextLine()) {
-				CONSOLE.nextLine();
-			}
+		catch(Exception ex){
+			System.out.println(ERRORMESSAGE);
 		}
-		
 	}
 
 	/**
@@ -190,7 +150,7 @@ public class LockedMe {
 			
 			if(folder.exists()) {
 				folder.delete();
-				System.out.println("File "+ fileName+ " deleted sucessefully " );
+				System.out.println("File - "+ fileName+ " deleted sucessefully " );
 			}
 			else {
 				System.out.println("Failed to delete the file");
@@ -231,5 +191,54 @@ public class LockedMe {
 		catch(Exception ex) {
 			System.out.println(ERRORMESSAGE);
 		}
+	}
+	
+	/**
+	 * this method performs the operation of business menu
+	 */
+	public static void businessMenu(){
+		 boolean leave = true;
+			while(leave) {
+				System.out.println();
+				System.out.println("Business operations - ");
+				System.out.println("1.Create a new file");
+				System.out.println("2.Delete a file");
+				System.out.println("3.Search a file");
+				System.out.println("4.Return to the main menu");
+				System.out.println();
+				 
+				System.out.println("Enter your choice");
+				boolean bIsAnInt = CONSOLE.hasNextInt();
+				
+				if(bIsAnInt){
+					int businessCh = CONSOLE.nextInt();	
+					if(businessCh == 1) {
+						createFiles();
+						continue;
+					}
+					else if(businessCh == 2) {
+						deleteFiles();
+						continue;
+					}
+					else if(businessCh == 3) {
+						searchFiles();
+						continue;
+					}
+					else if(businessCh == 4) {
+						System.out.println("Returned to the main menu");
+						leave = false;
+						break;
+					}
+					else {
+						System.out.println("Invalid option");
+					}
+				}
+				else {
+					System.out.println("enter only integer");
+					System.out.println();
+				}
+				CONSOLE.nextLine();
+				CONSOLE.nextLine();
+			}
 	}
 }
